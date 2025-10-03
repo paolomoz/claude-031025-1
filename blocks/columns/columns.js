@@ -1,5 +1,3 @@
-import { createOptimizedPicture } from '../../scripts/aem.js';
-
 export default function decorate(block) {
   const cols = [...block.firstElementChild.children];
   block.classList.add(`columns-${cols.length}-cols`);
@@ -16,11 +14,5 @@ export default function decorate(block) {
         }
       }
     });
-  });
-
-  // optimize pictures
-  block.querySelectorAll('picture > img').forEach((img) => {
-    const picture = img.closest('picture');
-    picture.replaceWith(createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }]));
   });
 }

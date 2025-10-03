@@ -1,3 +1,5 @@
+import { createOptimizedPicture } from '../../scripts/aem.js';
+
 export default function decorate(block) {
   /* change to ul, li */
   const ul = document.createElement('ul');
@@ -10,6 +12,9 @@ export default function decorate(block) {
     });
     ul.append(li);
   });
-  // DA already provides optimized picture elements, don't reprocess
+  ul.querySelectorAll('picture > img').forEach((img) => {
+    const newPicture = createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }]);
+    img.closest('picture').replaceWith(newPicture);
+  });
   block.replaceChildren(ul);
 }
